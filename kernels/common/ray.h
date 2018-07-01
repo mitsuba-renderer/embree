@@ -131,7 +131,7 @@ namespace embree
     __forceinline void verifyHit(const vbool<K>& valid0) const
     {
       vbool<K> valid = valid0 & geomID != vuint<K>(RTC_INVALID_GEOMETRY_ID);
-      const vbool<K> vt = (abs(tfar) <= vfloat<K>(FLT_LARGE)) | (tfar == vfloat<K>(neg_inf));
+      const vbool<K> vt = (abs(tfar) < vfloat<K>(inf)) | (tfar == vfloat<K>(neg_inf));
       const vbool<K> vu = (abs(u) <= vfloat<K>(FLT_LARGE));
       const vbool<K> vv = (abs(u) <= vfloat<K>(FLT_LARGE));
       const vbool<K> vnx = abs(Ng.x) <= vfloat<K>(FLT_LARGE);
@@ -230,7 +230,7 @@ namespace embree
     __forceinline void verifyHit() const
     {
       if (geomID == RTC_INVALID_GEOMETRY_ID) return;
-      const bool vt = (abs(tfar) <= FLT_LARGE) || (tfar == float(neg_inf));
+      const bool vt = (abs(tfar) < float(inf)) || (tfar == float(neg_inf));
       const bool vu = (abs(u) <= FLT_LARGE);
       const bool vv = (abs(u) <= FLT_LARGE);
       const bool vnx = abs(Ng.x) <= FLT_LARGE;

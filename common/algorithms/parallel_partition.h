@@ -177,6 +177,7 @@ namespace embree
       size_t numMisplacedRangesRight = 0;
       size_t numMisplacedItemsLeft   = 0;
       size_t numMisplacedItemsRight  = 0;
+      (void) numMisplacedItemsRight;
 
       for (size_t i=0; i<numTasks; i++)
       {	    

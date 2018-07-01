@@ -11,5 +11,5 @@ __ZN???rtc*
 __ZN????rtc*
 __ZN?????rtc*
 __ZN??????rtc*
-__ZN6embree13TaskScheduler*
-__ZN6embree713TaskScheduler*
+# __ZN6embree13TaskScheduler*
+# __ZN6embree713TaskScheduler*
