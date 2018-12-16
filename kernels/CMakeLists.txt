@@ -197,7 +197,7 @@ MACRO (CreateISADummyFiles list isa)
   SET(${list})
   FOREACH(src ${ARGN})
     SET(src_file ${CMAKE_CURRENT_SOURCE_DIR}/${src})
-    SET(dst_file ${CMAKE_BINARY_DIR}/${src}.${isa}.cpp)
+    SET(dst_file ${CMAKE_CURRENT_BINARY_DIR}/${src}.${isa}.cpp)
     SET(${list} ${${list}} ${dst_file})
     ADD_CUSTOM_COMMAND(OUTPUT ${dst_file}
       COMMAND ${CMAKE_COMMAND} 
