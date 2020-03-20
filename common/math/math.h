@@ -7,6 +7,7 @@
 #include "../sys/intrinsics.h"
 #include "constants.h"
 #include <cmath>
+#include <climits>
 
 #if defined(__ARM_NEON)
 #include "../simd/arm/emulation.h"
