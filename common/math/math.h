@@ -20,6 +20,7 @@
 #include "../sys/intrinsics.h"
 #include "constants.h"
 #include <cmath>
+#include <climits>
 
 #include <emmintrin.h>
 #include <xmmintrin.h>
