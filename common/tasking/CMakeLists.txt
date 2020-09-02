@@ -10,15 +10,21 @@ ELSEIF (TASKING_TBB)
   if (NOT ${EMBREE_TBB_ROOT} STREQUAL "")
     set(TBB_ROOT ${EMBREE_TBB_ROOT})
   endif()
-  FIND_PACKAGE(TBB REQUIRED tbb)
+
+  ADD_LIBRARY(tasking STATIC taskschedulertbb.cpp)
+
+  if (TARGET tbb)
+    TARGET_LINK_LIBRARIES(tasking PUBLIC tbb)
+  else()
+    FIND_PACKAGE(TBB REQUIRED tbb)
+    TARGET_LINK_LIBRARIES(tasking PUBLIC TBB)
+  endif()
 
   ##############################################################
   # Create tasking target and link against TBB. Also set include directory
   # information on tasking target to provide the "algorithms" object library
   # with the TBB header files
   ##############################################################
-  ADD_LIBRARY(tasking STATIC taskschedulertbb.cpp)
-  TARGET_LINK_LIBRARIES(tasking PUBLIC TBB)
   TARGET_INCLUDE_DIRECTORIES(tasking PUBLIC "${TBB_INCLUDE_DIRS}")
 
   include(installTBB)
