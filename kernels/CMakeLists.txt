@@ -311,7 +311,6 @@ target_include_directories(embree PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
   $<INSTALL_INTERFACE:include>)
 
-
 # libtbb is located in same install folder as libembree
 IF(WIN32)
 ELSEIF(APPLE)
@@ -328,6 +327,9 @@ ELSE()
   SET_TARGET_PROPERTIES(embree PROPERTIES LINK_FLAGS -Wl,--version-script=${PROJECT_SOURCE_DIR}/kernels/export.linux.map)
   SET_SOURCE_FILES_PROPERTIES(common/rtcore.cpp PROPERTIES OBJECT_DEPENDS ${PROJECT_SOURCE_DIR}/kernels/export.linux.map)
 ENDIF()
+
+# Wenzel, Sep 4, 2020 -- skip all of the installation instructions for Mitsuba
+return()
 
 #IF (EMBREE_ZIP_MODE)
 #  SET_TARGET_PROPERTIES(embree PROPERTIES VERSION ${EMBREE_VERSION_MAJOR} SOVERSION ${EMBREE_VERSION_MAJOR})
