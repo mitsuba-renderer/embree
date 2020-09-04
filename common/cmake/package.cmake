@@ -1,6 +1,11 @@
 ## Copyright 2009-2020 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
+INSTALL(DIRECTORY include/embree3 DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT devel)
+
+# Wenzel, Sep 4, 2020 -- skip all of the other installation instructions for Mitsuba
+return()
+
 INCLUDE(GNUInstallDirs)
 
 IF (NOT EMBREE_ZIP_MODE AND NOT WIN32 AND NOT APPLE)
@@ -35,7 +40,6 @@ ENDIF()
 # Install Headers
 ##############################################################
 
-INSTALL(DIRECTORY include/embree3 DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT devel)
 IF (NOT WIN32)
   INSTALL(DIRECTORY man/man3 DESTINATION ${CMAKE_INSTALL_MANDIR} COMPONENT devel)
 ENDIF()
