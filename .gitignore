@@ -9,3 +9,5 @@ kernels/config.h
 kernels/hash.h
 include/embree3/rtcore_config.h
 build
+cmake_install.cmake
+uninstall.cmake
