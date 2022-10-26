@@ -820,4 +820,3 @@ Version History
 -   Integration with the Intel® Implicit SPMD Program Compiler (Intel® ISPC)
 -   Instantiation and fast BVH reconstruction
 -   Example photo-realistic rendering engine for both C++ and Intel® ISPC
-
