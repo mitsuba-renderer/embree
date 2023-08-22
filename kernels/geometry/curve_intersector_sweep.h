@@ -231,9 +231,11 @@ namespace embree
         
         /* clamp and correct u parameter */
         u_outer0 = clamp(u_outer0,vfloatx(0.0f),vfloatx(1.0f));
-        u_outer1 = clamp(u_outer1,vfloatx(0.0f),vfloatx(1.0f));
         u_outer0 = lerp(u0,u1,(vfloatx(step)+u_outer0)*(1.0f/float(vfloatx::size)));
+#if !defined (EMBREE_BACKFACE_CULLING_CURVES)
+        u_outer1 = clamp(u_outer1,vfloatx(0.0f),vfloatx(1.0f));
         u_outer1 = lerp(u0,u1,(vfloatx(step)+u_outer1)*(1.0f/float(vfloatx::size)));
+#endif
         
         /* intersect with inner cylinder */
         BBox<vfloatx> tc_inner;
@@ -242,8 +244,10 @@ namespace embree
         
         /* at the unstable area we subdivide deeper */
         const vboolx unstable0 = (!valid_inner) | (abs(dot(Vec3vfx(Vec3fa(ray.dir)),Ng_inner0)) < 0.3f);
+#if !defined (EMBREE_BACKFACE_CULLING_CURVES)
         const vboolx unstable1 = (!valid_inner) | (abs(dot(Vec3vfx(Vec3fa(ray.dir)),Ng_inner1)) < 0.3f);
-      
+#endif
+
         /* subtract the inner interval from the current hit interval */
         BBox<vfloatx> tp0, tp1;
         subtract(tp,tc_inner,tp0,tp1);
@@ -265,6 +269,7 @@ namespace embree
         }
         valid1 &= tp1.lower+dt <= ray.tfar;
         
+#if !defined (EMBREE_BACKFACE_CULLING_CURVES)
         /* iterate over all second hits front to back */
         const vintx termDepth1 = select(unstable1,vintx(maxDepth+1),vintx(maxDepth));
         vboolx recursion_valid1 = valid1 & (depth < termDepth1);
@@ -276,11 +281,16 @@ namespace embree
           //found = found | intersect_bezier_iterative_debug   (ray,dt,curve,i,u_outer1,tp1,h0,h1,Ng_outer1,dP0du,dP3du,epilog);
           valid1 &= tp1.lower+dt <= ray.tfar;
         }
+#endif
 
         /* push valid segments to stack */
         recursion_valid0 &= tp0.lower+dt <= ray.tfar;
+#if !defined (EMBREE_BACKFACE_CULLING_CURVES)
         recursion_valid1 &= tp1.lower+dt <= ray.tfar;
         const vboolx recursion_valid = recursion_valid0 | recursion_valid1;
+#else
+        const vboolx recursion_valid = recursion_valid0;
+#endif
         if (any(recursion_valid))
         {
           assert(sptr < stack_size);
