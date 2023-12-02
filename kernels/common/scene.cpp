@@ -553,6 +553,7 @@ namespace embree
   void Scene::createGridAccel()
   {
     BVHFactory::IntersectVariant ivariant = isRobustAccel() ? BVHFactory::IntersectVariant::ROBUST : BVHFactory::IntersectVariant::FAST;
+    (void) ivariant;
 #if defined(EMBREE_GEOMETRY_GRID)
     if (device->grid_accel == "default") 
     {

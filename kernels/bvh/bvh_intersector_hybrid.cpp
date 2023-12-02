@@ -862,6 +862,7 @@ namespace embree
             //STAT3(normal.trav_hit_boxes[popcnt(m_frustum_node)], 1, 1, 1);
 #endif
             size_t num_child_hits = 0;
+            (void) num_child_hits;
             do {
               const size_t i = bscf(m_frustum_node);
               vfloat<K> lnearP;

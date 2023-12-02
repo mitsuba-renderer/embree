@@ -109,6 +109,7 @@ namespace embree
       //exceptions &= ~_MM_MASK_UNDERFLOW;
       //exceptions &= ~_MM_MASK_INEXACT;
       _MM_SET_EXCEPTION_MASK(exceptions);
+      (void) exceptions;
     }
     
     /* print info header */
