@@ -7,6 +7,9 @@ x64
 .DS_Store
 kernels/config.h
 kernels/hash.h
+kernels/export.linux.map
+kernels/export.macosx.map
+
 include/embree3/rtcore_config.h
 build
 cmake_install.cmake
